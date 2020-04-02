@@ -50,7 +50,7 @@ polygonSeries.useGeodata = true;
 
 var dataJson;
 
-fetch('../data-corona.php')
+fetch('./data-corona.php')
   .then((response) => {
     return response.json();
   })
