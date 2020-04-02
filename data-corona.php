@@ -49,7 +49,7 @@ function getColor($value){
     }elseif($value > 1000){
         $color = "#800026";
     }else{
-        $color = "'#FFEDA0";
+        $color = "#FFEDA0";
     }
     return $color;
 }
