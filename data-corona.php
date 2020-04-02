@@ -33,16 +33,16 @@ $meninggal = json_decode(getData('http://covid19.datapedia.id/json/map_prop_meni
 
 
 
-function getColor($d) {
-    return $d > 1000 ? '#800026' :
-           $d > 500  ? '#BD0026' :
-           $d > 200  ? '#E31A1C' :
-           $d > 100  ? '#FC4E2A' :
-           $d > 50   ? '#FD8D3C' :
-           $d > 20   ? '#FEB24C' :
-           $d > 10   ? '#FED976' :
-                      '#FFEDA0';
-}
+// function getColor($d) {
+//     return $d > 1000 ? '#800026' :
+//            $d > 500  ? '#BD0026' :
+//            $d > 200  ? '#E31A1C' :
+//            $d > 100  ? '#FC4E2A' :
+//            $d > 50   ? '#FD8D3C' :
+//            $d > 20   ? '#FEB24C' :
+//            $d > 10   ? '#FED976' :
+//                       '#FFEDA0';
+// }
 
 function json_change_key($arr, $oldkey, $newkey) {
     $json = str_replace('"'.$oldkey.'":', '"'.$newkey.'":', json_encode($arr));
@@ -61,8 +61,8 @@ $meninggal = json_change_key($meninggal,'value','meninggal');
 
 $no = 0;
 foreach($positif as $key => $val){
-    $ratio = bcdiv($val->positif / $max,1);
-    $data[] = array('id' => $val->id,'positif'=> $val->positif,'sembuh' => $sembuh[$no]->sembuh,'rawat' => $rawat[$no]->rawat,'meninggal' => $meninggal[$no]->meninggal,'fill' => getColor($val->positif));
+    // $ratio = bcdiv($val->positif / $max,1);
+    $data[] = array('id' => $val->id,'positif'=> $val->positif,'sembuh' => $sembuh[$no]->sembuh,'rawat' => $rawat[$no]->rawat,'meninggal' => $meninggal[$no]->meninggal,'fill' => '#800026');
     $no++;
 }
 
