@@ -46,6 +46,10 @@ chart.projection = new am4maps.projections.Mercator();
 var polygonSeries = chart.series.push(new am4maps.MapPolygonSeries());
 
 var dataJson;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2cee767737c7939ae437b100544452b432c08b14
 fetch('data-corona.php')
   .then((response) => {
     return response.json();

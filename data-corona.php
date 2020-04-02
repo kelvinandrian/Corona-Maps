@@ -67,7 +67,6 @@ $meninggal = json_change_key($meninggal,'value','meninggal');
 
 $no = 0;
 foreach($positif as $key => $val){
-    // $ratio = bcdiv($val->positif / $max,1);
     $data[] = array('id' => $val->id,'positif'=> $val->positif,'sembuh' => $sembuh[$no]->sembuh,'rawat' => $rawat[$no]->rawat,'meninggal' => $meninggal[$no]->meninggal,'fill' => getColor($val->positif));
     $no++;
 }
