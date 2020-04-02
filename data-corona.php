@@ -1,13 +1,35 @@
 <?php
 
-$json = file_get_contents('https://api.kawalcorona.com/indonesia/provinsi/');
+// phpinfo();
+
+function getData($url){
+    $ch = curl_init(); 
+
+    // set url 
+    curl_setopt($ch, CURLOPT_URL, $url);
+
+    // return the transfer as a string 
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+
+    // $output contains the output string 
+    $output = curl_exec($ch); 
+
+    // tutup curl 
+    curl_close($ch);      
+
+    // menampilkan hasil curl
+    return $output;
+}
+
+
+$json = getData('https://api.kawalcorona.com/indonesia/provinsi/');
 
 $array = json_decode($json);
 
-$positif = json_decode(file_get_contents('http://covid19.datapedia.id/json/map_prop_positif.php'));
-$sembuh = json_decode(file_get_contents('http://covid19.datapedia.id/json/map_prop_sembuh.php'));
-$rawat = json_decode(file_get_contents('http://covid19.datapedia.id/json/map_prop_rawat.php'));
-$meninggal = json_decode(file_get_contents('http://covid19.datapedia.id/json/map_prop_meninggal.php'));
+$positif = json_decode(getData('http://covid19.datapedia.id/json/map_prop_positif.php'));
+$sembuh = json_decode(getData('http://covid19.datapedia.id/json/map_prop_sembuh.php'));
+$rawat = json_decode(getData('http://covid19.datapedia.id/json/map_prop_rawat.php'));
+$meninggal = json_decode(getData('http://covid19.datapedia.id/json/map_prop_meninggal.php'));
 
 
 
