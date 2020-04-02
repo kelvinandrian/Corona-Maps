@@ -22,22 +22,6 @@ function getColor($d) {
                       '#FFEDA0';
 }
 
-function linear_color($from, $to, $ratio) {
-    // normalize ralio
-    $ratio = $ratio<0?0:($ratio>1?1:$ratio);
-    // unsure colors are numeric values
-    if(!is_numeric($from))$from=hexdec($from);
-    if(!is_numeric($to))$to=hexdec($to);
-
-    $rf = 0xFF & ($from >> 0x10);
-    $gf = 0xFF & ($from >> 0x8);
-    $bf = 0xFF & $from;
-    $rt = 0xFF & ($to >> 0x10);
-    $gt = 0xFF & ($to >> 0x8);
-    $bt = 0xFF & $to;
-    return str_pad( dechex(($bf + (($bt-$bf)*$ratio)) + ($gf + (($gt-$gf)*$ratio) << 0x8) + ($rf + (($rt-$rf)*$ratio) << 0x10)), 6,'0',STR_PAD_LEFT);
-}
-
 function json_change_key($arr, $oldkey, $newkey) {
     $json = str_replace('"'.$oldkey.'":', '"'.$newkey.'":', json_encode($arr));
     return json_decode($json); 

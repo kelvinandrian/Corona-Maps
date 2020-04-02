@@ -4,7 +4,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8" />
+    <!-- <meta charset="UTF-8" /> -->
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <title>Corona Data Di Indonesia</title>
     <link rel="stylesheet" href="index.css" />
   </head>
