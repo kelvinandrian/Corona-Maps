@@ -76,18 +76,22 @@ polygonTemplate.tooltipHTML = `<center><strong>Provinsi {name}</strong></center>
 <table>
 <tr>
   <th align="left">Positif</th>
+  <td>:</td>
   <td>{positif}</td>
 </tr>
 <tr>
   <th align="left">Sembuh</th>
+  <td>:</td>
   <td>{sembuh}</td>
 </tr>
 <tr>
   <th align="left">Rawat</th>
+  <td>:</td>
   <td>{rawat}</td>
 </tr>
 <tr>
   <th align="left">Meninggal</th>
+  <td>:</td>
   <td>{meninggal}</td>
 </tr>
 </table>
@@ -97,7 +101,7 @@ polygonTemplate.propertyFields.fill = "fill";
 
 // Create hover state and set alternative fill color
 var hs = polygonTemplate.states.create("hover");
-hs.properties.fill = "{fill}";
+hs.properties.fill = "#FFEBCD";
     </script>
   </body>
 </html>
