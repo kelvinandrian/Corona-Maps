@@ -35,21 +35,21 @@ $meninggal = json_decode(getData('http://covid19.datapedia.id/json/map_prop_meni
 
 function getColor($value){
     if($value > 10 && $value < 20){
-        $color = "#ffb885";
+        $color = "#EABAB5";
     }elseif($value > 20 && $value < 50){
-        $color = "#ff9f59";
+        $color = "#E3A097";
     }elseif($value > 50 && $value < 100){
-        $color = "#ff9059";
+        $color = "#DC8779";
     }elseif($value > 100 && $value < 200){
-        $color = "#fc722d";
+        $color = "#D46D5A";
     }elseif($value > 200 && $value < 500){
-        $color = "#fc5a2d";
+        $color = "#CD543C";
     }elseif($value > 500 && $value < 1000){
-        $color = "#ff20146";
+        $color = "#C63A1E";
     }elseif($value > 1000){
-        $color = "#bf0f0f";
+        $color = "#BF2100";
     }else{
-        $color = "#ffd4b5";
+        $color = "#F2D4D4";
     }
     return $color;
 }

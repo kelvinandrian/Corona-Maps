@@ -39,18 +39,15 @@ chart.zoomControl.slider.height = 150;
 // Set map definition
 chart.geodata = am4geodata_indonesiaLow ;
 // Set projection
-chart.projection = new am4maps.projections.Miller();
+// chart.projection = new am4maps.projections.Miller();
+chart.projection = new am4maps.projections.Mercator();
 
 // Create map polygon series
 var polygonSeries = chart.series.push(new am4maps.MapPolygonSeries());
-polygonSeries.exclude = ["MY-13","TL","BN","MY-12"];
-
-// Make map load polygon (like country names) data from GeoJSON
-polygonSeries.useGeodata = true;
 
 var dataJson;
 
-fetch('../data-corona.php')
+fetch('data-corona.php')
   .then((response) => {
     return response.json();
   })
@@ -59,19 +56,49 @@ fetch('../data-corona.php')
     polygonSeries.data = data;
   });
 
-  function heatMapColorforValue(value){
-  var h = (1.0 - value) * 240
-  return "hsl(" + h + ", 100%, 50%)";
-}
+//Set min/max fill color for each area
+polygonSeries.heatRules.push({
+    property: "fill",
+    target: polygonSeries.mapPolygons.template,
+    min: am4core.color("#F2D4D4"),
+    max: am4core.color("#BF2100")
+  });
 
-// console.log(dataJson);
-// polygonSeries.data = JSON.parse(JSON.stringify(dataJson));
-// console.log(polygonSeries.data);
+polygonSeries.exclude = ["MY-13","TL","BN","MY-12"];
+
+
+// Make map load polygon (like country names) data from GeoJSON
+polygonSeries.useGeodata = true;
+
+  let heatLegend = chart.createChild(am4maps.HeatLegend);
+  heatLegend.series = polygonSeries;
+  heatLegend.align = "right";
+  heatLegend.width = am4core.percent(25);
+  heatLegend.marginRight = am4core.percent(4);
+  heatLegend.minValue = 0;
+  heatLegend.maxValue = 40000000;
+  heatLegend.valign = "bottom";
+
+  // Set up custom heat map legend labels using axis ranges
+  var minRange = heatLegend.valueAxis.axisRanges.create();
+  minRange.value = heatLegend.minValue;
+  minRange.label.text = "Rendah";
+  var maxRange = heatLegend.valueAxis.axisRanges.create();
+  maxRange.value = heatLegend.maxValue;
+  maxRange.label.text = "Tinggi";
+
+  // Blank out internal heat legend value axis labels
+  heatLegend.valueAxis.renderer.labels.template.adapter.add("text", function(labelText) {
+    return "";
+  });
+
+
 
 
 // Configure series
 var polygonTemplate = polygonSeries.mapPolygons.template;
-// polygonTemplate.tooltipText = "{positif}";
+
+
 polygonTemplate.tooltipHTML = `<center><strong>Provinsi {name}</strong></center>
 <hr />
 <table>
@@ -97,8 +124,11 @@ polygonTemplate.tooltipHTML = `<center><strong>Provinsi {name}</strong></center>
 </tr>
 </table>
 <hr />`;
+polygonTemplate.nonScalingStroke = true;
+  polygonTemplate.strokeWidth = 0.5;
 // polygonTemplate.fill = am4core.color("#74B266");
 polygonTemplate.propertyFields.fill = "fill";
+
 
 // Create hover state and set alternative fill color
 var hs = polygonTemplate.states.create("hover");
