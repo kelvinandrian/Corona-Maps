@@ -33,16 +33,26 @@ $meninggal = json_decode(getData('http://covid19.datapedia.id/json/map_prop_meni
 
 
 
-// function getColor($d) {
-//     return $d > 1000 ? '#800026' :
-//            $d > 500  ? '#BD0026' :
-//            $d > 200  ? '#E31A1C' :
-//            $d > 100  ? '#FC4E2A' :
-//            $d > 50   ? '#FD8D3C' :
-//            $d > 20   ? '#FEB24C' :
-//            $d > 10   ? '#FED976' :
-//                       '#FFEDA0';
-// }
+function getColor($value){
+    if($value > 10 && $value < 20){
+        $color = "#FED976";
+    }elseif($value > 20 && $value < 50){
+        $color = "#FEB24C";
+    }elseif($value > 50 && $value < 100){
+        $color = "#FD8D3C";
+    }elseif($value > 100 && $value < 200){
+        $color = "#FC4E2A";
+    }elseif($value > 200 && $value < 500){
+        $color = "#E31A1C";
+    }elseif($value > 500 && $value < 1000){
+        $color = "#BD0026";
+    }elseif($value > 1000){
+        $color = "#800026";
+    }else{
+        $color = "'#FFEDA0";
+    }
+    return $color;
+}
 
 function json_change_key($arr, $oldkey, $newkey) {
     $json = str_replace('"'.$oldkey.'":', '"'.$newkey.'":', json_encode($arr));
@@ -51,10 +61,6 @@ function json_change_key($arr, $oldkey, $newkey) {
 
 $positif = json_change_key($positif,'value','positif');
 
-// $numbers = array_column($array, 'positif');
-// $min = min($numbers);
-// $max = max($numbers);
-
 $sembuh = json_change_key($sembuh,'value','sembuh');
 $rawat = json_change_key($rawat,'value','rawat');
 $meninggal = json_change_key($meninggal,'value','meninggal');
@@ -62,7 +68,7 @@ $meninggal = json_change_key($meninggal,'value','meninggal');
 $no = 0;
 foreach($positif as $key => $val){
     // $ratio = bcdiv($val->positif / $max,1);
-    $data[] = array('id' => $val->id,'positif'=> $val->positif,'sembuh' => $sembuh[$no]->sembuh,'rawat' => $rawat[$no]->rawat,'meninggal' => $meninggal[$no]->meninggal,'fill' => '#800026');
+    $data[] = array('id' => $val->id,'positif'=> $val->positif,'sembuh' => $sembuh[$no]->sembuh,'rawat' => $rawat[$no]->rawat,'meninggal' => $meninggal[$no]->meninggal,'fill' => getColor($val->positif));
     $no++;
 }
 
