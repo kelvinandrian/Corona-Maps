@@ -51,9 +51,9 @@ function json_change_key($arr, $oldkey, $newkey) {
 
 $positif = json_change_key($positif,'value','positif');
 
-$numbers = array_column($array, 'positif');
-$min = min($numbers);
-$max = max($numbers);
+// $numbers = array_column($array, 'positif');
+// $min = min($numbers);
+// $max = max($numbers);
 
 $sembuh = json_change_key($sembuh,'value','sembuh');
 $rawat = json_change_key($rawat,'value','rawat');
